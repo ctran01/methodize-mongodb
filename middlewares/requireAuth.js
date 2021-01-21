@@ -18,6 +18,8 @@ module.exports = (req, res, next) => {
     }
     const { userId } = payload;
     const user = await User.findById(userId);
+    //if requireAuth is used, it inserts user into request as req.user
+    //Here you can access req.user._id, req.user.email, req.user.name inside the request
     req.user = user;
     next();
   });

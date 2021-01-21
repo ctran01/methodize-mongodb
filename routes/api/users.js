@@ -54,6 +54,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, hashed_password } = req.body;
+
   if (!email || !hashed_password) {
     return res.status(422).send({ error: "Must provide email and password" });
   }
