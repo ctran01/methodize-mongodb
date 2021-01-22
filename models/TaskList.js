@@ -1,20 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const teamSchema = new Schema({
+const tasklistSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  description: {
-    type: String,
+  project_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
   },
-  projects: [
+  tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "project",
+      ref: "Task",
     },
   ],
 });
 
-mongoose.model("Team", teamSchema);
+mongoose.model("TaskList", tasklistSchema);

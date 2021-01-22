@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userteamSchema = new Schema({
-  user_id: {
+const projectSchema = {
+  name: {
+    type: String,
+    required: true,
+  },
+  owner_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
@@ -10,6 +14,6 @@ const userteamSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Team",
   },
-});
+};
 
-mongoose.model("UserTeam", userteamSchema);
+mongoose.model("Project", projectSchema);
