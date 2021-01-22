@@ -7,12 +7,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    maxlength: 100,
   },
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
+    maxlength: 50,
   },
   hashed_password: {
     type: String,
@@ -22,6 +24,38 @@ const userSchema = new Schema({
     type: String,
     required: false,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Date,
+    required: true,
+  },
+  teams: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Team",
+    },
+  ],
+  projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
+  taskslists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TaskList",
+    },
+  ],
+  tasks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
 });
 
 userSchema.pre("save", function (next) {
@@ -47,4 +81,5 @@ userSchema.methods.comparePassword = function (password) {
   const user = this;
   return bcrypt.compareSync(password, user.hashed_password);
 };
+
 mongoose.model("User", userSchema);
