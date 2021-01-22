@@ -16,8 +16,8 @@ module.exports = (req, res, next) => {
     if (err) {
       return res.status(401).send({ error: "You must be logged in." });
     }
-    const { userId } = payload;
-    const user = await User.findById(userId);
+    const { id } = payload;
+    const user = await User.findById(id);
     //if requireAuth is used, it inserts user into request as req.user
     //Here you can access req.user._id, req.user.email, req.user.name inside the request
     req.user = user;

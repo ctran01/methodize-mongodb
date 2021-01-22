@@ -1,5 +1,9 @@
-require("./models/User");
-require("./models/Team");
+// require("./models/User");
+// require("./models/Team");
+// require("./models/Project");
+// require("./models/TaskList");
+// require("./models/Task");
+// require("./models/Comment");
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,7 +12,9 @@ const cors = require("cors");
 const mongoURI = process.env.mongoURI;
 const users = require("./routes/api/users");
 const teams = require("./routes/api/teams");
+const projects = require("./routes/api/projects");
 const requireAuth = require("./middlewares/requireAuth");
+const Team = require("./models/Team");
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -29,7 +35,7 @@ var corsOptions = {
     }
   },
 };
-app.use(cors(corsOptions));
+app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(users);
 app.use("/teams", teams);
