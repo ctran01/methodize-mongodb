@@ -1,9 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const getUserToken = require("../../utilities/getUserToken");
-const secret = process.env.SECRET;
-const User = mongoose.model("User");
+// const User = mongoose.model("User");
+const User = require("../../models/User");
 
 const router = express.Router();
 
@@ -25,6 +24,8 @@ router.post("/register", async (req, res) => {
       name: name,
       email: email,
       hashed_password: password,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
     //presave hashes and salts password
     await newUser.save();
