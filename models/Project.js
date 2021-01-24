@@ -15,8 +15,8 @@ const projectSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",
     },
-    tasklists: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaskList" }],
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
+    TaskLists: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaskList" }],
+    Tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
   },
 
   { timestamps: true }

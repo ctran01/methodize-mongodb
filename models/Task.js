@@ -30,7 +30,7 @@ const taskSchema = new Schema(
     completed_at: {
       type: Date,
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    Comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   { timestamps: true }
 );

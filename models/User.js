@@ -32,25 +32,25 @@ const userSchema = new Schema({
     type: Date,
     required: true,
   },
-  teams: [
+  Teams: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",
     },
   ],
-  projects: [
+  Projects: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",
     },
   ],
-  taskslists: [
+  Taskslists: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "TaskList",
     },
   ],
-  tasks: [
+  Tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Task",

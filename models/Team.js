@@ -10,13 +10,13 @@ const teamSchema = new Schema(
     description: {
       type: String,
     },
-    projects: [
+    Projects: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "project",
+        ref: "Project",
       },
     ],
-    users: [
+    Users: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
