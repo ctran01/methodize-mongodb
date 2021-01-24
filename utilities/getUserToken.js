@@ -5,6 +5,7 @@ module.exports = (user) => {
     id: user._id,
     email: user.email,
   };
-  const token = jwt.sign(userDataForToken, secret, { expiresIn: 3600 });
+  const token = jwt.sign(userDataForToken, secret);
+  // { expiresIn: 3600 }
   return token;
 };

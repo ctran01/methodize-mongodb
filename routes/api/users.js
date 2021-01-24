@@ -3,11 +3,20 @@ const mongoose = require("mongoose");
 const getUserToken = require("../../utilities/getUserToken");
 // const User = mongoose.model("User");
 const User = require("../../models/User");
+const requireAuth = require("../../middlewares/requireAuth");
+const getAuthorization = require("../../middlewares/getAuthorization");
 
 const router = express.Router();
 
-router.get("/test", (req, res) => {
+router.get("/test", requireAuth, (req, res) => {
   res.send({ msg: "This is the user route" });
+});
+
+//get user information
+router.get("/user/:userId", requireAuth, getAuthorization, async (req, res) => {
+  const id = req.params.userId;
+  const user = await User.findById(id).populate("teams");
+  res.json(user);
 });
 
 router.post("/register", async (req, res) => {
@@ -57,6 +66,23 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     return res.status(422).send({ error: "Invalid password or email" });
   }
+});
+
+router.put("/register/onboard", async (req, res) => {
+  const { email, teamName } = req.body;
+
+  const user = await User.findOne({ email: email });
+  const token = getUserToken(user);
+  res.status(200).send({ id: user._id, token, email: user.email });
+
+  //create initial team
+  const newTeam = await Team.create({
+    name: teamName,
+  });
+  newTeam.Users.push(user);
+  user.Teams.push(newTeam);
+  await newTeam.save();
+  await user.save();
 });
 
 module.exports = router;

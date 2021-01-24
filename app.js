@@ -6,6 +6,7 @@
 // require("./models/Comment");
 require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -35,10 +36,11 @@ var corsOptions = {
     }
   },
 };
+app.use(morgan("dev"));
 app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(users);
-app.use("/teams", teams);
+app.use("/team", teams);
 
 mongoose
   .connect(mongoURI, {
